@@ -1,0 +1,252 @@
+%----------------------------------------------------------------------------------------
+%	USEFUL PACKAGES AND COMMANDS
+%----------------------------------------------------------------------------------------
+
+\usepackage[english]{babel} % Load characters and hyphenation
+%\usepackage[english=british]{csquotes}	% English quotes
+\usepackage{xeCJK}
+
+% \RequirePackage[l2tabu,orthodox]{nag} % turn on warnings because of bad style
+\RequirePackage{etoolbox} % Easy programming to modify TeX stuff
+%\RequirePackage{iftex} % Check wether XeTeX is being used
+%\RequirePackage{xifthen} % Easy conditionals
+%\RequirePackage{xkeyval} % Manage class options
+\RequirePackage{xparse} % Parse arguments for macros
+\RequirePackage{xpatch} % Patch LaTeX code in external packages
+\RequirePackage{xstring} % Parse strings
+\RequirePackage{varioref} % For the cross-references; must be loaded before the 'hyperref' and 'cleveref' packages
+
+%\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage[version=4]{mhchem} % Package for chemical equation typesetting
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+
+\RequirePackage{ragged2e} % Required to achieve better ragged paragraphs
+\RequirePackage{setspace} % Required to easily set the space between lines
+%\RequirePackage{hyphenat} % Hyphenation for special fonts
+\RequirePackage{microtype} % Improves character and word spacing
+%\RequirePackage{needspace} % Required to prevent page break right after a sectioning command
+\RequirePackage{xspace} % Better print trailing whitespace
+%\RequirePackage[usenames,dvipsnames,table]{xcolor} % Colours
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT
+%----------------------------------------------------------------------------------------
+
+% Set the default page layout
+\RequirePackage[
+	a4paper,
+	top=27.4mm,
+    bottom=27.4mm,
+    inner=24.8mm,
+    outer=24.8mm
+]{geometry}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR MACROS
+%----------------------------------------------------------------------------------------
+
+\newcommand{\authorstyle}[1]{{\large\usefont{OT1}{phv}{b}{n}#1}} % Authors style (Helvetica)
+\newcommand{\institution}[1]{{\footnotesize\usefont{OT1}{phv}{m}{sl}#1}} % Institutions style (Helvetica)
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{
+	\parindent0pt
+	\centering
+	\vspace{-100pt} % Move the entire title section up
+	\HorRule\vspace{10pt} % Horizontal rule before the title
+	\fontsize{24}{28}\usefont{OT1}{phv}{b}{n}\selectfont % Helvetica
+	%\color{red!50!black} % Text colour for the title and author(s)
+}
+
+\posttitle{
+	\par\vskip 10pt % Whitespace under the title
+} 
+
+\preauthor{
+	\centering
+} % Anything that will appear before \author is printed
+
+\postauthor{ % Anything that will appear after \author is printed
+	\parindent0pt
+	\vspace{10pt} % Space before the rule
+	\par\HorRule % Horizontal rule after the title
+	\vspace{0pt} % Space after the title section
+}
+
+%----------------------------------------------------------------------------------------
+%	ENCODING AND FONTS
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{xeCJK}
+
+\setCJKmainfont[
+    UprightFont=NotoSerifCJKsc-Regular,
+    BoldFont=NotoSerifCJKsc-Bold,
+    ItalicFont=NotoSerifCJKsc-Regular,
+    BoldItalicFont=NotoSerifCJKsc-Bold,
+    ItalicFeatures=FakeSlant,
+    BoldItalicFeatures=FakeSlant]{NotoSerifCJKsc}
+	
+\setCJKsansfont[
+    UprightFont=NotoSansCJKsc-Regular,
+    BoldFont=NotoSansCJKsc-Bold,
+    ItalicFont=NotoSansCJKsc-Regular,
+    BoldItalicFont=NotoSansCJKsc-Bold,
+    ItalicFeatures=FakeSlant,
+    BoldItalicFeatures=FakeSlant]{NotoSansSC}
+  
+\setCJKmonofont[
+    UprightFont=NotoSansMonoCJKsc-Regular,
+    BoldFont=NotoSansMonoCJKsc-Bold,
+    ItalicFont=NotoSansMonoCJKsc-Regular,
+    BoldItalicFont=NotoSansMonoCJKsc-Bold,
+    ItalicFeatures=FakeSlant,
+    BoldItalicFeatures=FakeSlant]{NotoSansMonoSC}
+
+\RequirePackage{amssymb} % Must be loaded before unicode-math
+\RequirePackage[force]{filehook} % Fixes an error
+\RequirePackage{unicode-math} % Math fonts in xetexorluatex
+\setromanfont[Scale=1.04]{Libertinus Serif}
+\setsansfont[Scale=1]{Libertinus Sans}
+%\setmonofont[Scale=.89]{Liberation Mono}
+\setmonofont[Mapping={}]{Sarasa Fixed SC}
+\setmathfont{Libertinus Math}
+
+\justifying% Justify text
+\singlespacing% Set the interline space to a single line
+\frenchspacing% No additional space after periods
+\normalfont% Use the default font
+\normalsize% Use the default size
+
+\setstretch{1.40}
+\linespread{1.25}
+
+% indentation for Chinese environment
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\renewcommand{\labelitemi}{\small$\blacktriangleright$}
+\renewcommand{\labelitemii}{\textbullet}
+\RequirePackage{enumitem}
+\setlist[itemize]{noitemsep}
+\setlist[enumerate]{noitemsep}
+\setlist[description]{noitemsep}
+
+%----------------------------------------------------------------------------------------
+%	FIGURES, TABLES, LISTINGS AND CAPTIONS
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{graphicx} % Include figures
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio} % Improves figure scaling
+%\RequirePackage{tikz} % Allows to draw custom shapes
+\RequirePackage{booktabs} % Nicer tables
+\RequirePackage{multirow} % Cells occupying multiple rows in tables
+\RequirePackage{multicol} % Multiple columns in dictionary
+%\RequirePackage{rotating} % Allows tables and figures to be rotated
+%\RequirePackage{minted}
+\RequirePackage{morewrites} % Fix some errors related to floats
+\RequirePackage[hypcap=true,justification=centering]{caption} % Correctly placed anchors for hyperlinks
+% \RequirePackage{atbegshi}
+% \RequirePackage{perpage}
+\let\c@abspage\relax
+\RequirePackage{floatrow} % Set up captions of floats
+%\RequirePackage{dblfloatfix} % Better positioning of wide figures and tables
+
+% Improve the figure placing (see https://www.overleaf.com/learn/latex/Tips)
+\def\topfraction{.9}%
+\def\textfraction{0.35}%
+\def\floatpagefraction{0.8}%
+
+% Set the space between floats and main text
+%\renewcommand\FBaskip{.4\topskip}%
+%\renewcommand\FBbskip{\FBaskip}%
+
+% Tighten up space between displays (e.g., equations) and make symmetric (from tufte-latex)
+\setlength\abovedisplayskip{6pt plus 2pt minus 4pt}%
+\setlength\belowdisplayskip{6pt plus 2pt minus 4pt}%
+\abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@%
+\abovedisplayshortskip \z@ \@plus3\p@%
+\belowdisplayskip \abovedisplayskip%
+\belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@%
+
+\setlength\columnseprule{.4pt} % Set the width of vertical rules in tables
+
+% Set the global caption style
+\captionsetup{
+    font=footnotesize,%
+    labelfont=bf,
+	strut=no,%
+	%hypcap=true, % Links point to the top of the figure
+	singlelinecheck=false,%
+	%width=\marginparwidth,
+	indention=0pt, % Suppress indentation
+	parindent=0pt, % Suppress space between paragraphs
+	%aboveskip=6pt, % Increase the space between the figure and the caption
+	%belowskip=6pt, % Increase the space between the caption and the table
+}
+
+\RequirePackage{listings} % Print code listings
+\lstset{
+    basicstyle=\ttfamily,% 基本代码风格
+    keywordstyle=\bfseries,% 关键字风格
+    commentstyle=\rmfamily\itshape,% 注释的风格，斜体
+    stringstyle=\ttfamily,% 字符串风格
+    flexiblecolumns,% 别问为什么，加上这个
+    numbers=left,% 行号的位置在左边
+    showspaces=false,% 是否显示空格，显示了有点乱，所以不现实了
+    showstringspaces=false,
+    captionpos=t,% 这段代码的名字所呈现的位置，t指的是top上面
+	frame=lrtb,% 显示边框
+	%linewidth=.8\textwidth,
+	xleftmargin=4em,xrightmargin=4em,%设置边距
+}
+\floatsetup[lstlisting]{ % Captions for lstlistings
+	capposition=above,%
+	margins=centering,%
+	floatwidth=\textwidth%
+}
+
+% Change the position of the captions
+%\DeclareFloatSeparators{marginparsep}{\hskip\marginparsep}%
+
+\floatsetup[figure]{ % Captions for figueres
+	capposition=bottom,%
+	margins=centering,%
+	floatwidth=\textwidth%
+	}
+\floatsetup[table]{ % Captions for tables
+	capposition=above,%
+	margins=centering,%
+	floatwidth=\textwidth%
+	}
+
+% Needed to have continued figures and tables (https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Figures_in_multiple_parts)
+%\DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
+%\captionsetup[ContinuedFloat]{labelformat=cont}
+
+%----------------------------------------------------------------------------------------
+%	HYPERREFERENCES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{hyperref} % Required for hyperlinks
+\RequirePackage{bookmark} % Required for pdf bookmarks
+
+\PassOptionsToPackage{hyphens}{url} % Break long URLs and use hyphens to separate the pieces
+
+\hypersetup{ % Set up hyperref options
+	unicode, % Use unicode for links
+	pdfborder={0 0 0}, % Suppress border around pdf
+	%xetex,
+	%pagebackref=true,
+	%hyperfootnotes=false, % We already use footmisc
+	bookmarksdepth=section,
+	bookmarksopen=true, % Expand the bookmarks as soon as the pdf file is opened
+	%bookmarksopenlevel=4,
+	linktoc=all, % Toc entries and numbers links to pages
+	breaklinks=true,
+	colorlinks=false,
+}
